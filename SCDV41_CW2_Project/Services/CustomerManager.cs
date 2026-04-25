@@ -37,5 +37,26 @@ namespace SCDV41_CW2_Project.Services
                 }
             }
         }
+
+        //method to output all customers of a specific name in the list
+        public void ViewCustomersByName(string name)
+        {
+            //search for the customer with the correct name
+            //return that to a list
+            var search = _customers.Where(w => w.Name.Equals(name)).ToList();
+
+            if (search.Count == 0)
+            {
+                Console.WriteLine($"There are no customers with the name: {name} in the system.");
+            }
+            else
+            {
+                //loop through what has been returned and output a summary for each one
+                foreach (var customer in search)
+                {
+                    customer.CustomerInfo();
+                }
+            }
+        }
     }
 }
