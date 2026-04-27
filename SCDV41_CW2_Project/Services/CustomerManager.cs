@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,5 +59,50 @@ namespace SCDV41_CW2_Project.Services
                 }
             }
         }
+
+        //method to increase the number of missed bookings of a specific customer
+        public void IncrementMissedBooking(string name)
+        {
+            //search for the customer with the correct name
+            //return that to a list
+            var search = _customers.Where(w => w.Name.Equals(name)).ToList();
+
+            if (search.Count == 0)
+            {
+                Console.WriteLine($"There are no customers with the name: {name} in the system.");
+            }
+            else
+            {
+                //loop through what has been returned and increment the missed bookings by one
+                foreach (var customer in search)
+                {
+                    customer.CustomerMissed();
+                    customer.CustomerInfo();
+                }
+            }
+        }
+
+        //method to delete a customer
+        public void DeleteCustomer(string name)
+        {
+            //search for the customer with the correct name
+            //return that to a list
+            var search = _customers.Where(w => w.Name.Equals(name)).ToList();
+
+            if (search.Count == 0)
+            {
+                Console.WriteLine($"There are no customers with the name: {name} in the system.");
+            }
+            else
+            {
+                //loop through what has been returned and delete each one
+                foreach (var customer in search)
+                {
+                    _customers.Remove(customer);
+                    Console.WriteLine($"Customer {name} has been deleted");
+                }
+            }
+        }
+
     }
 }

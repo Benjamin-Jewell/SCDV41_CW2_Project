@@ -37,5 +37,61 @@ namespace SCDV41_CW2_Project.Services
                 }
             }
         }
+
+        //method to change staff availability
+        public void changeAvailability(string name, string availability)
+        {
+            //search for the staff with the correct name
+            //return that to a list
+            var search = _staff.Where(w => w.Name.Equals(name)).ToList();
+
+            if (search.Count == 0)
+            {
+                Console.WriteLine($"There are no staff members with the name: {name}");
+            }
+            else
+            {
+                try
+                {
+                    //test if the entered string can be converted into a bool (if the string is not "true" or "false")
+                    var availabilityBool = Convert.ToBoolean(availability);
+                    //loop through what has been returend and update the availability
+                    foreach (var staff in search)
+                    {
+                        //set the availability of the staff member to the entered value (true or false)
+                        staff.StaffAvailability(availabilityBool);
+                        staff.StaffInfo();
+                    }
+                }
+                catch (Exception)
+                {
+                    //if the entered string cannot be converted into a bool, return an error
+                    Console.WriteLine("Please enter available or unavailable");
+                }
+                
+            }
+        }
+
+        //method to delete a staff member
+        public void DeleteStaff(string name)
+        {
+            //search for the staff member with the correct name
+            //return that to a list
+            var search = _staff.Where(w => w.Name.Equals(name)).ToList();
+
+            if (search.Count == 0)
+            {
+                Console.WriteLine($"There are no staff members with the name: {name} in the system.");
+            }
+            else
+            {
+                //loop through what has been returned and delete each one
+                foreach (var staff in search)
+                {
+                    _staff.Remove(staff);
+                    Console.WriteLine($"Customer {name} has been deleted");
+                }
+            }
+        }
     }
 }

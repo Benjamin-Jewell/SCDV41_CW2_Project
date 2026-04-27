@@ -47,5 +47,11 @@ namespace SCDV41_CW2_Project.Models
         {
             Console.WriteLine($"{Name}:\n\nEmail: {Email}\nPhone Number: {PhoneNumber}\nMissed Bookings: {MissedBookings}\n");
         }
+
+        //method to increase missed bookings
+        public void CustomerMissed()
+        {
+            MissedBookings ++;
+        }
     }
 }

@@ -48,7 +48,7 @@ Console.WriteLine("########################################################");
 Console.WriteLine("10. Create new vehicle");
 Console.WriteLine("11. View all vehicles");
 Console.WriteLine("12. View vehicles by type");
-Console.WriteLine("13. Edit vehicles");
+Console.WriteLine("13. Delete a vehicle");
 Console.WriteLine("########################################################");
 Console.WriteLine("14. Create new staff member");
 Console.WriteLine("15. View all staff members");
@@ -135,9 +135,45 @@ while (true)
 
             customerManager.ViewCustomersByName(customerNameSearch);
         }
+        //if the choice is 9, allow the user to either update a customer or delete a customer
         else if (choice == 9)
         {
-            Console.WriteLine("Feature Coming Soon");
+            Console.WriteLine("Select one of the following options:");
+            Console.WriteLine("########################################################");
+            Console.WriteLine("1. Update Customer's missed bookings");
+            Console.WriteLine("2. Delete Customer");
+
+            try
+            {
+                var customerOption = Convert.ToInt32(Console.ReadLine());
+
+                //if the user picks option 1, increment the missed booking value of a customer
+                if (customerOption == 1)
+                {
+                    Console.WriteLine("Enter the name of the customer you would like to increase the missed bookings of");
+                    var customerMissedIncrement = Console.ReadLine();
+
+                    Console.WriteLine("########################################################");
+
+                    customerManager.IncrementMissedBooking(customerMissedIncrement);
+                }
+                //if the user picks option 2, delete a customer
+                else if (customerOption == 2)
+                {
+                    Console.WriteLine("Enter the name of the customer you would like to delete");
+                    var customerDeleteInput = Console.ReadLine();
+
+                    customerManager.DeleteCustomer(customerDeleteInput);
+                }
+                else
+                {
+                    Console.WriteLine("Please enter one of the above options");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         //if the choice is 10, create a new vehicle
         else if (choice == 10)
@@ -198,9 +234,13 @@ while (true)
 
             vehicleManager.ViewVehiclesByType(vehicleTypeSearch);
         }
+        //if the choice is 13, delete a vehicle
         else if (choice == 13)
         {
-            Console.WriteLine("Feature Coming Soon");
+            Console.WriteLine("Enter the name of the vehicle you would like to delete");
+            var vehicleDeleteInput = Console.ReadLine();
+
+            vehicleManager.DeleteVehicle(vehicleDeleteInput);
         }
         //if the choice is 14, create a new staff member
         else if (choice == 14)
@@ -235,10 +275,67 @@ while (true)
         }
         else if (choice == 16)
         {
-            Console.WriteLine("Feature Coming Soon");
+            Console.WriteLine("Select one of the following options:");
+            Console.WriteLine("########################################################");
+            Console.WriteLine("1. Update Staff's availability");
+            Console.WriteLine("2. Delete Staff");
+
+            try
+            {
+                var staffOption = Convert.ToInt32(Console.ReadLine());
+
+                //if the user picks option 1, change the availability of a staff member
+                if (staffOption == 1)
+                {
+                    //takes an input for the staff member's name
+                    Console.WriteLine("Enter the name of the staff member you would like to update the availability of");
+                    var staffAvailabilityName = Console.ReadLine();
+                    //takes an input for the availability status to be set
+                    Console.WriteLine("Enter the availabilty you would like to change them to (available/unavailable");
+                    var staffAvailabilityValue = Console.ReadLine();
+
+                    //sets the string of the availability input to lowercase to be more easily compared
+                    staffAvailabilityValue = staffAvailabilityValue.ToLower();
+
+                    //create a variable to store the true/false as a string later, so that it can be taken into the method
+                    var staffAvailabilityBool = "notAbool";
+
+                    //if the entered string is "available" set the bool version to true
+                    if (staffAvailabilityValue == "available")
+                    {
+                        staffAvailabilityBool = "true";
+                    }
+                    //if the entered string is "unavailable" set the bool version to false
+                    else if (staffAvailabilityValue == "unavailable")
+                    {
+                        staffAvailabilityBool = "false";
+                    }
+
+                    Console.WriteLine("########################################################");
+
+                    staffManager.changeAvailability(staffAvailabilityName, staffAvailabilityBool);
+                }
+                //if the user picks option 2, delete a staff member
+                else if (staffOption == 2)
+                {
+                    Console.WriteLine("Enter the name of the staff member you would like to delete");
+                    var staffDeleteInput = Console.ReadLine();
+
+                    staffManager.DeleteStaff(staffDeleteInput);
+                }
+                else
+                {
+                    Console.WriteLine("Please enter one of the above options");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         else if (choice == 17)
         {
+            //display an exit message to the user
             Console.WriteLine("########################################################");
             Console.WriteLine("Thank you for using Mitch's Motors Test Drive Management system!");
             Console.WriteLine("Exiting the program...");

@@ -32,7 +32,23 @@ namespace SCDV41_CW2_Project.Models
         //method to view staff info
         public void StaffInfo()
         {
-            Console.WriteLine($"{Name}:\n\nAvailable: {Available}\n");
+            if (Available == true)
+            {
+                var availability = "Available";
+                Console.WriteLine($"{Name}:\n\nAvailability: {availability}\n");
+            }
+            else
+            {
+                var availability = "Unavailable";
+                Console.WriteLine($"{Name}:\n\nAvailability: {availability}\n");
+            }
+                
+        }
+
+        //method to change staff availability
+        public void StaffAvailability(bool availability)
+        {
+            Available = availability;
         }
     }
 }
