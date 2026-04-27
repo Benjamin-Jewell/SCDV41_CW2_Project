@@ -6,6 +6,7 @@ using SCDV41_CW2_Project.Services;
 
 CustomerManager customerManager = new CustomerManager();
 VehicleManager vehicleManager = new VehicleManager();
+StaffManager staffManager = new StaffManager();
 
 //creating a few vehicles so that there are some in the system by default
 //seperate lines for creating the vehicle and adding it the the vehicle list
@@ -119,10 +120,12 @@ while (true)
                 Console.WriteLine(ex.Message);
             }
         }
+        //if the choice is 7, output all customers
         else if (choice == 7)
         {
             customerManager.ViewAllCustomers();
         }
+        //if the choice is 8, search customers by name
         else if (choice == 8)
         {
             Console.WriteLine("Enter the name of the customer you would like to search for");
@@ -136,6 +139,7 @@ while (true)
         {
             Console.WriteLine("Feature Coming Soon");
         }
+        //if the choice is 10, create a new vehicle
         else if (choice == 10)
         {
             try
@@ -174,10 +178,12 @@ while (true)
                 Console.WriteLine(ex.Message);
             }
         }
+        //if the choice is 11, output all vehicle data
         else if (choice == 11)
         {
             vehicleManager.ViewAllVehicles();
         }
+        //if the choice is 12, search vehicle data by type
         else if (choice == 12)
         {
 
@@ -196,13 +202,36 @@ while (true)
         {
             Console.WriteLine("Feature Coming Soon");
         }
+        //if the choice is 14, create a new staff member
         else if (choice == 14)
         {
-            Console.WriteLine("Feature Coming Soon");
+            try
+            {
+                //inputs for a new staff member
+                //staff name
+                Console.WriteLine("Enter Staff Member name");
+                var staffNameInput = Console.ReadLine();
+                //is staff available (default true)
+                var staffAvailableInput = true;
+
+                //Add details to Staff List
+                var staff = new Staff(staffNameInput, staffAvailableInput);
+
+                staffManager.CreateStaff(staff);
+
+                Console.WriteLine("########################################################");
+
+                staff.StaffInfo();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
+        //if the choice if 15, output all staff member data
         else if (choice == 15)
         {
-            Console.WriteLine("Feature Coming Soon");
+            staffManager.ViewAllStaff();
         }
         else if (choice == 16)
         {
