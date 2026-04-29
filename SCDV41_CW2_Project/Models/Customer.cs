@@ -14,7 +14,6 @@ namespace SCDV41_CW2_Project.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public int PhoneNumber { get; set; }
-
         public int MissedBookings { get; set; }
 
         //constructor

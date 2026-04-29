@@ -82,5 +82,29 @@ namespace SCDV41_CW2_Project.Services
                 }
             }
         }
+
+        //method to return vehicle name for booking information
+        public string GetVehicleName(string name)
+        {
+            //search for the vehicle with the correct name
+            //return that to a list
+            var search = _vehicles.Where(w => w.Name.Equals(name)).ToList();
+
+            if (search.Count == 0)
+            {
+                Console.WriteLine($"There are no vehicles with the name: {name} in the system.");
+                return "";
+            }
+            else
+            {
+                //loop through what has been returned and returns the name of each one
+                var nameOutput = "";
+                foreach (var vehicle in search)
+                {
+                    nameOutput = vehicle.Name;
+                }
+                return nameOutput;
+            }
+        }
     }
 }

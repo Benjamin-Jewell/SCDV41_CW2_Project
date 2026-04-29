@@ -93,5 +93,55 @@ namespace SCDV41_CW2_Project.Services
                 }
             }
         }
+
+        //method to return staff member's name for booking information
+        public string GetStaffName(string name)
+        {
+            //search for the staff member with the correct name
+            //return that to a list
+            var search = _staff.Where(w => w.Name.Equals(name)).ToList();
+
+            if (search.Count == 0)
+            {
+                Console.WriteLine($"There are no staff members with the name: {name} in the system.");
+                return "";
+            }
+            else
+            {
+                //loop through what has been returned and returns the name of each one
+                var nameOutput = "";
+                foreach (var staff in search)
+                {
+                    nameOutput = staff.Name;
+                }
+                return nameOutput;
+            }
+        }
+
+        //method to return staff member's availability for booking system
+        public string GetStaffAvailability(string name)
+        {
+            //search for the staff member with the correct name
+            //return that to a list
+            var search = _staff.Where(w => w.Name.Equals(name)).ToList();
+
+            if (search.Count == 0)
+            {
+                Console.WriteLine($"There are no staff members with the name: {name} in the system.");
+                return "";
+            }
+            else
+            {
+                //loop through what has been returned and returns the name of each one
+                var availableOutput = "";
+                foreach (var staff in search)
+                {
+                    var availableOutputB = staff.Available;
+                    availableOutput = availableOutputB.ToString();
+                }
+                return availableOutput;
+            }
+        }
+
     }
 }

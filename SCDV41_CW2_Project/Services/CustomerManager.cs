@@ -1,10 +1,11 @@
-﻿using SCDV41_CW2_Project.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using SCDV41_CW2_Project.Models;
 
 namespace SCDV41_CW2_Project.Services
 {
@@ -101,6 +102,59 @@ namespace SCDV41_CW2_Project.Services
                     _customers.Remove(customer);
                     Console.WriteLine($"Customer {name} has been deleted");
                 }
+            }
+        }
+
+        //method to return customer's name for booking information
+        public string GetCustomerName(string name)
+        {
+            //search for the customer with the correct name
+            //return that to a list
+            var search = _customers.Where(w => w.Name.Equals(name)).ToList();
+
+            if (search.Count == 0)
+            {
+                Console.WriteLine($"There are no customers with the name: {name} in the system.");
+                return "";
+            }
+            else
+            {
+                //loop through what has been returned and returns the name of each one
+                var nameOutput = "";
+                foreach (var customer in search)
+                {
+                    nameOutput = customer.Name;
+                    
+                    
+                }
+                return nameOutput;
+            }
+        }
+
+        //method to return customer's missed bookings for booking information
+        public string GetCustomerMissedBookings(string name)
+        {
+            //search for the customer with the correct name
+            //return that to a list
+            var search = _customers.Where(w => w.Name.Equals(name)).ToList();
+
+            if (search.Count == 0)
+            {
+                Console.WriteLine($"There are no customers with the name: {name} in the system.");
+                return "";
+            }
+            else
+            {
+                //loop through what has been returned and returns the name of each one
+                var missedOutput = "";
+                foreach (var customer in search)
+                {
+                    var missedOutputC = customer.MissedBookings;
+                    missedOutput = missedOutputC.ToString();
+
+
+                }
+                return missedOutput;
             }
         }
 
